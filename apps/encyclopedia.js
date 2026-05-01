@@ -1,40 +1,19 @@
 window.apps = window.apps || {};
 
-const data = {
-  Plastic:{how:"Petroleum polymers",use:"Packaging",dispose:"Recycle center"},
-  Glass:{how:"Molten sand",use:"Bottles/windows",dispose:"Glass recycling"},
-  Paper:{how:"Wood pulp",use:"Books",dispose:"Paper recycling"},
-  Metal:{how:"Ore refining",use:"Tools",dispose:"Scrap recycling"}
-};
+window.apps.encyclopedia = function () {
 
-window.apps.encyclopedia=function(){
+  const items = Array.from({length:40}, (_,i)=>({
+    name:`Object ${i+1}`,
+    info:`Full lifecycle analysis: creation → usage → disposal of Object ${i+1}`
+  }));
+
   return `
-    <div>
-      <h3>📚 Encyclopedia</h3>
-      ${Object.keys(data).map(i=>`
-        <div onclick="showItem('${i}')"
-        style="margin:5px;padding:6px;background:#2dd4bf;color:black;cursor:pointer">
-          ${i}
-        </div>
-      `).join("")}
-    </div>
-  `;
-};
+    <h2>📚 Knowledge Matrix</h2>
 
-window.showItem=function(name){
-  const item=data[name];
-
-  document.getElementById("windows").innerHTML=`
-    <div class="window" style="left:200px;top:120px">
-      <div class="titlebar">
-        <span>${name}</span>
-        <button onclick="openApp('encyclopedia')">Back</button>
+    ${items.map(i=>`
+      <div class="tile" onclick="alert('${i.info}')">
+        ${i.name}
       </div>
-      <div class="content">
-        <p><b>Made:</b> ${item.how}</p>
-        <p><b>Use:</b> ${item.use}</p>
-        <p><b>Dispose:</b> ${item.dispose}</p>
-      </div>
-    </div>
+    `).join("")}
   `;
 };
